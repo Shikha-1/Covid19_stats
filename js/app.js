@@ -1,4 +1,3 @@
-
 // SELECT ALL ELEMENTS
 const country_name_element = document.querySelector(".country .name");
 const total_cases_element = document.querySelector(".total-cases .value");
@@ -69,7 +68,9 @@ function fetchData(country) {
       });
 
     await fetch(
-      "https://api.covid19api.com/total/country/" + country + "/status/recovered",
+      "https://api.covid19api.com/total/country/" +
+        country +
+        "/status/recovered",
       requestOptions
     )
       .then((res) => {
@@ -99,8 +100,6 @@ function fetchData(country) {
 
   api_fetch(country);
 }
-
-fetchData(user_country);
 
 // UPDATE UI FUNCTION
 function updateUI() {
@@ -196,5 +195,6 @@ const monthsNames = [
 
 function formatDate(dateString) {
   let date = new Date(dateString);
+
   return `${date.getDate()} ${monthsNames[date.getMonth()]}`;
 }
