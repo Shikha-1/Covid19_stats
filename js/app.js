@@ -18,13 +18,22 @@ let app_data = [],
   formatedDates = [];
 
 // GET USERS COUNTRY CODE
-let country_code = geoplugin_countryCode();
-let user_country;
-country_list.forEach((country) => {
-  if (country.code == country_code) {
-    user_country = country.name;
-  }
-});
+fetch(
+  "https://api.ipgeolocation.io/ipgeo?apiKey=14c7928d2aef416287e034ee91cd360d"
+)
+  .then((res) => {
+    return res.json();
+  })
+  .then((data) => {
+    let country_code = data.country_code2;
+    let user_country;
+    country_list.forEach((country) => {
+      if (country.code == country_code) {
+        user_country = country.name;
+      }
+    });
+    fetchData(user_country);
+  });
 
 //FETCH API
 function fetchData(country) {
