@@ -6,6 +6,7 @@ const recovered_element = document.querySelector(".recovered .value");
 const new_recovered_element = document.querySelector(".recovered .new-value");
 const deaths_element = document.querySelector(".deaths .value");
 const new_deaths_element = document.querySelector(".deaths .new-value");
+
 const ctx = document.getElementById("axes_line_chart").getContext("2d");
 
 // APP VARIABLES
@@ -17,9 +18,7 @@ let app_data = [],
   formatedDates = [];
 
 // GET USERS COUNTRY CODE
-fetch(
-  "https://api.ipgeolocation.io/ipgeo?apiKey=14c7928d2aef416287e034ee91cd360d"
-)
+fetch("https://api.ipgeolocation.io/ipgeo?apiKey=14c7928d2aef416287e034ee91cd360d")
   .then((res) => {
     return res.json();
   })
@@ -34,7 +33,7 @@ fetch(
     fetchData(user_country);
   });
 
-//FETCH API
+// FETCH API
 function fetchData(country) {
   user_country = country;
   country_name_element.innerHTML = "Loading...";
@@ -52,9 +51,7 @@ function fetchData(country) {
 
   const api_fetch = async (country) => {
     await fetch(
-      "https://api.covid19api.com/total/country/" +
-        country +
-        "/status/confirmed",
+      "https://api.covid19api.com/total/country/" + country + "/status/confirmed",
       requestOptions
     )
       .then((res) => {
@@ -68,9 +65,7 @@ function fetchData(country) {
       });
 
     await fetch(
-      "https://api.covid19api.com/total/country/" +
-        country +
-        "/status/recovered",
+      "https://api.covid19api.com/total/country/" + country + "/status/recovered",
       requestOptions
     )
       .then((res) => {
@@ -112,8 +107,7 @@ function updateStats() {
   const new_confirmed_cases = total_cases - cases_list[cases_list.length - 2];
 
   const total_recovered = recovered_list[recovered_list.length - 1];
-  const new_recovered_cases =
-    total_recovered - recovered_list[recovered_list.length - 2];
+  const new_recovered_cases = total_recovered - recovered_list[recovered_list.length - 2];
 
   const total_deaths = deaths_list[deaths_list.length - 1];
   const new_deaths_cases = total_deaths - deaths_list[deaths_list.length - 2];
